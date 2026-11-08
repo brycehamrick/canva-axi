@@ -1,0 +1,58 @@
+{
+  "name": "canva-axi",
+  "version": "0.1.0",
+  "description": "AXI-compliant CLI for Canva — search designs, generate and edit designs, manage folders, brand templates, assets, comments, and exports from the shell, over Canva's remote MCP server with one-time browser login. Spec axi/1.0-2026-07.",
+  "type": "module",
+  "bin": {
+    "canva-axi": "bin/canva-axi.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "bin",
+    "dist",
+    "skills",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node --eval \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "pretest": "npm run build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "preversion": "npm test",
+    "version": "node scripts/sync-version.mjs && git add src/version.ts",
+    "prepublishOnly": "npm test",
+    "skill:gen": "npm run build && node scripts/gen-skill.mjs",
+    "skill:check": "node scripts/gen-skill.mjs --check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brycehamrick/canva-axi.git"
+  },
+  "keywords": [
+    "axi",
+    "canva",
+    "mcp",
+    "cli",
+    "agents",
+    "design",
+    "toon"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brycehamrick/canva-axi/issues"
+  },
+  "homepage": "https://github.com/brycehamrick/canva-axi#readme",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@toon-format/toon": "^4.1.1",
+    "axi-sdk-js": "^0.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4"
+  }
+}
